@@ -1,0 +1,49 @@
+from string import punctuation
+import random
+
+def letras_a_vectores(lista_palabras):
+    vectores = []
+    for palabra in lista_palabras:
+        for i in punctuation:
+            palabra = palabra.replace(i, "")
+        acentos = "áéíóúÁÉÍÓÚ"
+        for i in range(len(acentos)):
+            palabra = palabra.replace(acentos[i], "aeiouAEIOU"[i])
+        vector = []
+        vector.append(len(palabra))
+        vectores.append(vector)
+    return vectores
+
+def matriz_nxn(n):
+    matriz = []
+    for i in range(n):
+        fila = []
+        for j in range(n):
+            fila.append(random.randint(1, 10))
+        matriz.append(fila)
+    return matriz
+
+def ordenar(vector):
+    indices = []
+    for j in range(len(vector)):
+        indices.append(j)
+    for i in range(len(vector)):
+        for j in range(len(vector)):
+            if vector[j] < vector[i]:
+                vector[j], vector[i] = vector[i], vector[j]
+                indices[j], indices[i] = indices[i], indices[j]
+    return indices
+
+a = input('Ingrese una palabra: ').strip()
+b = input('Ingrese una palabra: ').strip()
+c = input('Ingrese una palabra: ').strip()
+palabras = [a, b, c]
+print("pasando de palabras a vectores:")
+vectores = letras_a_vectores(palabras)
+print(vectores)
+
+vector = [random.randint(0, 99) for _ in range(random.randint(2, 10))]
+print(vector)
+indices = ordenar(vector)
+print("ordenando la posicion de mayor a menor")
+print(indices)
